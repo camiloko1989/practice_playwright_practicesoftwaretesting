@@ -8,6 +8,8 @@ export class LoginPage {
   readonly loginButton: Locator;
   readonly registerLink: Locator;
   readonly forgotPasswordLink: Locator;
+  readonly errorMessage: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +19,7 @@ export class LoginPage {
         this.loginButton = page.getByRole('button', { name: 'Login' });
         this.registerLink = page.getByRole('link', { name: 'Register your account' });
         this.forgotPasswordLink = page.getByRole('link', { name: 'Forgot password?' });
+        this.errorMessage = page.getByText('Invalid email or password');
     }
 
     async goto() {

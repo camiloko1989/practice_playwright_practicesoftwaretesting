@@ -45,3 +45,25 @@ test('Register new user', async ({ page }) => {
   await registrationPage.registerButton.click();
   await expect(loginPage.userNameInput).toBeVisible();
 });
+
+test('Login with registered user', async ({ page }) => {
+  let homePage = new HomePage(page);
+  await homePage.goto();
+  await homePage.login.click();
+  let loginPage = new LoginPage(page);
+  await loginPage.userNameInput.fill('user1704234567890@example.com');
+  await loginPage.passwordInput.fill('SecurePassweird123!');
+  await loginPage.loginButton.click();
+  await expect(loginPage.userNameInput).toBeVisible();
+});
+
+test('Invalid Login', async ({ page }) => {
+  let homePage = new HomePage(page);
+  await homePage.goto();
+  await homePage.login.click();
+  let loginPage = new LoginPage(page);
+  await loginPage.userNameInput.fill('user1704234567890@example.com');
+  await loginPage.passwordInput.fill('IncorrectPassword!');
+  await loginPage.loginButton.click();
+  await expect(loginPage.errorMessage).toBeVisible();
+});
